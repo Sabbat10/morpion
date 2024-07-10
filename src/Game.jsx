@@ -14,6 +14,7 @@ export default function Game() {
     setxIsNext(!xIsNext);
   }
 
+  //
   function jumpTo(nexMove) {
     setxIsNext(nexMove % 2 === 0);
     setHistory(history.slice(0, nexMove + 1));
