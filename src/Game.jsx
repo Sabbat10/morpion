@@ -1,7 +1,6 @@
 import React from "react";
 import Board from "./components/Board";
 import "./Game.css";
-// import calculateWinner from "./components/calculateWinner";
 import { useState } from "react";
 
 export default function Game() {

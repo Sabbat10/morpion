@@ -5,11 +5,8 @@ import { useState } from "react";
 
 // composant principal
 export default function App({ xIsNext, squares, onPlay }) {
-  // les useState
-  //   const [xIsNext, setxIsNext] = useState(true);
   const [square, setSquare] = useState(Array(9).fill(null));
 
-  //
   function handClick(i) {
     if (square[i] || calculateWinner(square)) {
       return;
@@ -24,7 +21,6 @@ export default function App({ xIsNext, squares, onPlay }) {
 
     onPlay(nextSquare);
     setSquare(nextSquare);
-    // setxIsNext(!xIsNext);
   }
   // fonction de fin de partie
   const winner = calculateWinner(square);
