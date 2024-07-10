@@ -1,14 +1,15 @@
 import React from "react";
-import Square from "./components/Square";
-import "./App.css";
+import Square from "./Square";
 
 import { useState } from "react";
 
-export default function App() {
+// composant principal
+export default function App({ xIsNext, squares, onPlay }) {
   // les useState
-  const [xIsNext, setxIsNext] = useState(true);
+  //   const [xIsNext, setxIsNext] = useState(true);
   const [square, setSquare] = useState(Array(9).fill(null));
 
+  //
   function handClick(i) {
     if (square[i] || calculateWinner(square)) {
       return;
@@ -20,43 +21,22 @@ export default function App() {
     } else {
       nextSquare[i] = "0";
     }
+
+    onPlay(nextSquare);
     setSquare(nextSquare);
     setxIsNext(!xIsNext);
   }
-
-  function calculateWinner(squares) {
-    const lines = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
-    ];
-    for (let i = 0; i < lines.length; i++) {
-      const [a, b, c] = lines[i];
-      if (
-        squares[a] &&
-        squares[a] === squares[b] &&
-        squares[a] === squares[c]
-      ) {
-        return squares[a];
-      }
-    }
-    return null;
-  }
-
+  // fonction de fin de partie
   const winner = calculateWinner(square);
   let status;
   if (winner) {
-    status = "Winner: " + winner;
+    status = "Gagnant est : " + winner;
   } else {
-    status = "Next player: " + (xIsNext ? "X" : "O");
+    status = "Joueur suivant: " + (xIsNext ? "X" : "O");
   }
 
   return (
+    // div du jeu de morpion
     <div>
       <h3>Jeu de Morpion</h3>
       <div className="status">
@@ -82,4 +62,25 @@ export default function App() {
       </div>
     </div>
   );
+}
+
+// fonction de fin de partie
+function calculateWinner(squares) {
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      return squares[a];
+    }
+  }
+  return null;
 }
