@@ -14,12 +14,31 @@ export default function Game() {
     setxIsNext(!xIsNext);
   }
 
+  function jumpTo(nexMove) {
+    setxIsNext(nexMove % 2 === 0);
+    setHistory(history.slice(0, nexMove + 1));
+  }
+
+  const moves = history.map((squares, move) => {
+    let description;
+    if (move > 0) {
+      description = "Go to move #" + move;
+    } else {
+      description = "Go to game start";
+    }
+    return (
+      <li key={move}>
+        <button onClick={() => jumpTo(move)}>{description}</button>
+      </li>
+    );
+  });
+
   return (
     <div className="game">
       <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handPlay} />
 
       <div className="game-info">
-        <ol>{/* TODO */}</ol>
+        <ol>{moves}</ol>
       </div>
     </div>
   );

@@ -24,7 +24,7 @@ export default function App({ xIsNext, squares, onPlay }) {
 
     onPlay(nextSquare);
     setSquare(nextSquare);
-    setxIsNext(!xIsNext);
+    // setxIsNext(!xIsNext);
   }
   // fonction de fin de partie
   const winner = calculateWinner(square);
